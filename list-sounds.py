@@ -6,6 +6,7 @@ import os
 import sys
 import re
 import time
+import subprocess
 
 
 # input() workaround to support Python 2. Python 3 renamed raw_input() => input().
@@ -49,15 +50,25 @@ class Discover_Files(object):
 
                     # We have got a video file! Increment the counter
                     self.counter += 1
-		    library = re.sub(self.root_dir,'',filepath).strip()
-		    head, tail = os.path.split(library)
+               
+                    split_fp= filepath.split('/')
+                    especie =  split_fp[len(split_fp) - 2]
+                    tail =  split_fp[len(split_fp) - 1]
+                    folder = ""
+                    for s in range(0,len(split_fp) -1):
+                       folder += split_fp[s] + '/'
+                    listado =  os.listdir(folder)
+                    image_name = ''
+                    for l in listado:
+                        if l.endswith('jpg'):
+                           image_name = l
 
-
-		    self.file_list.append({'path':'{0}'.format(filepath),
-				           'library': head, 
+		    self.file_list.append({'path':'{0}'.format(folder),
 				           'file_size':os.path.getsize(filepath), 
 				           'filename':tail,
-                                           'root_dir' :self.root_dir, 
+                                           'root_dir' :self.root_dir,
+                                           'especie': especie,
+                                           'image_name': image_name
 			                  })
 
             elif os.path.isdir(filepath):
