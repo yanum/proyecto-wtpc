@@ -12,6 +12,8 @@ class Bird(object):
 	self.wav = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
         self.bird_image = bird_dict['imagen']   # image filename
+	if self.wav == mp3:
+           pass
         (self.rate,self.sample) = wav.read(self.dir+self.wav)
 
     def set_envelope(self):
