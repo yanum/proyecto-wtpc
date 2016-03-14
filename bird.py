@@ -9,12 +9,15 @@ class Bird(object):
     """
     def __init__(self, bird_dict):
         self.dir = bird_dict['path']            # absolute path of dir
-	self.wav = bird_dict['filename']        # wav filename
+    	self.wav = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
-        self.bird_image = bird_dict['imagen']   # image filename
-	if self.wav == mp3:
-           pass
+        self.bird_image = bird_dict['imagen_name']   # image filename
+	    if self.wav == 'mp3':
+            mp3_to_wav(self)
         (self.rate,self.sample) = wav.read(self.dir+self.wav)
+
+    def mp3_to_wav(self)
+        pass
 
     def set_envelope(self):
         pass
