@@ -7,6 +7,7 @@ import sys
 import re
 import time
 import subprocess
+from pydub import AudioSegment
 
 
 # input() workaround to support Python 2. Python 3 renamed raw_input() => input().
@@ -50,7 +51,7 @@ class Discover_Files(object):
 
                     # We have got a video file! Increment the counter
                     self.counter += 1
-               
+              
                     split_fp= filepath.split('/')
                     especie =  split_fp[len(split_fp) - 2]
                     tail =  split_fp[len(split_fp) - 1]
@@ -62,7 +63,18 @@ class Discover_Files(object):
                     for l in listado:
                         if l.endswith('jpg'):
                            image_name = l
+                    '''     
+                    if filepath.endswith('mp3'):
+                        print "mp3", filepath, folder +  tail.split('.')[0] + '.wav'
 
+                        try:
+                            tail =  tail.split('.')[0] + '.wav'
+                            AudioSegment.from_mp3(filepath).export(folder + tail , format="wav")
+                            os.remove(filepath)
+                        except:
+                           print "Error de Conversion"
+                           tail = "error_conversion"
+                    '''
 		    self.file_list.append({'path':'{0}'.format(folder),
 				           'file_size':os.path.getsize(filepath), 
 				           'filename':tail,
@@ -82,4 +94,7 @@ if __name__ == '__main__':
     DF = Discover_Files("./audioFiles" )
     DF.get_paths()
 
-    print DF.file_list, len(DF.file_list)
+    print len(DF.file_list)
+
+    for d in DF.file_list:
+        print d
