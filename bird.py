@@ -19,8 +19,39 @@ class Bird(object):
     def mp3_to_wav(self)
         pass
 
-    def set_envelope(self):
-        pass
+    def get_envelope(self, windowLength = 50, time=False, lowPassFilter=False, plot=False):
+        """
+        return the envelope of the sample/s. 
+        First take a filter and take the absolut value, 
+        next create an array with the maximum value per "time" of all the samples
+        then reduce the data number with a factor 'windowLengh'
+        and finally return the filtered envelope
+        if 'time' is set true, return the mean value (of time) for each data of the filtered envalue
+        this method is far to be optimal but try to be redeable
+        """
+        #filtering the signal (maybe this should be another method)
+        filteredSignal = self.sample
+        if lowPassFilter:
+            pass
+        #taking the absolut value 
+        absSignal = np.fabs(filteredSignal)
+        maximumSignal = np.maximum(absSignal)
+        envelope = np.array([ np.amax(maximumSignal[w:w+windowLenght])\
+                for w in range(maximumSignal.shape/windowLength)])
+
+        if time:
+            pass
+#           envelopeTime = np.array([np.mean(self.time[w:w+windowLength]\
+#                       for w in range(maximumSignal.shape/windowLength)])
+        else:
+            envelopeTime = np.array([i in range(envelope.shape)])
+
+        if plot:
+            # if plot then return plot object (not sure if this could be done)
+            pass
+
+        return envelopeTime, envelope, 'envelope'
+
 
     def set_sonogram(self):
         pass
