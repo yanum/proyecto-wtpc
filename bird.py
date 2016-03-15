@@ -14,6 +14,10 @@ class Bird(object):
         self.bird_image = bird_dict['imagen']   # image filename
 	if self.wav == mp3:
            pass
+        """
+        Read a wav file and convert it to an array (sample)
+        Saves also the sample rate (int)'''
+        """
         (self.rate,self.sample) = wav.read(self.dir+self.wav)
 
     def set_envelope(self):
