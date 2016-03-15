@@ -16,6 +16,7 @@ class Bird(object):
             mp3_to_wav(self)
         (self.rate,self.sample) = wav.read(self.dir+self.wav)
         self.time= np.arange(self.sample.size)*(1./self.rate) # X axis , time
+
     def mp3_to_wav(self)
         pass
 
@@ -28,13 +29,14 @@ class Bird(object):
     def set_timeserie(self):
         pass
 
+
     def frec_vs_time(self): 
 	
-   	 plot(self.time,self.sample,label='Time Signal')  
+   	 fig=plot(self.time,self.sample,label='Time Signal')  # PLot frecuency vr time
 
    	 grid(True)
-   	 pylab.xlabel("time [s]")
-   	 pylab.ylabel("Amplitde")
-
+   	 pylab.xlabel("time [s]") # Label of axis x
+   	 pylab.ylabel("Amplitde") # Label or axis y
+	 return fig
 	
    	
