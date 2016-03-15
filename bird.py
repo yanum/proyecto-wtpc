@@ -36,7 +36,7 @@ class Bird(object):
 
 
 
-    def get_envelope(self, windowTimeLength = 5, ):
+    def get_envelope(self, windowLength = 20, ):
         """
         windowTimeLength in seconds
         return the envelope of the sample/s. 
@@ -47,21 +47,14 @@ class Bird(object):
         if 'time' is set true, return the mean value (of time) for each data of the filtered envalue
         this method is far to be optimal but try to be redeable
         """
-        ndata=0
-        while self.time[ndata] < windowTimeLength/self.rate :
-            ndata += 1
-
-        totalWindows = len(self.time)/ndata
-        
-        sample = self.sample[:totalWindows*ndata]
-        time = self.time[:totalWindows*ndata]
-        
+        ndata = self.time. 
         #taking the absolut value 
         absSignal = np.fabs(sample)
-        maximumSignal = np.maximum(absSignal)
+        envelope = np.array([ np.amax(absSignal[w:w+windowLenght])\
+                for w in range(absSignal.shape/windowLength)])
+        envelope = np.array([ np.amax(self.time[w:w+windowLenght])\
+                for w in range(self.time.shape/windowLength)])
 
-        envelope = maximumSignal.resharp((totalWindows,ndata))
-        envelopeTime = time.resharp((totalWindows,ndata))
 
         return envelopeTime, envelope, 'envelope'
 
