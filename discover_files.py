@@ -34,7 +34,11 @@ class Discover_Files(object):
         movie_directory = os.path.abspath(self.files_directory)
 
         # Get a list of files in movie_directory
-        movie_directory_files = os.listdir(movie_directory)
+        try:
+            movie_directory_files = os.listdir(movie_directory)
+        except:
+            print "the folder doesn't exist"
+            sys.exit('Bye, bye!!')
 
         # Traverse through all files
         for filename in movie_directory_files:
@@ -88,9 +92,7 @@ class Discover_Files(object):
 		self.files_directory = filepath
                 self.get_paths()
 
-
-if __name__ == '__main__':
-
+def test():
     DF = Discover_Files("./audioFiles" )
     DF.get_paths()
 
@@ -98,3 +100,7 @@ if __name__ == '__main__':
 
     for d in DF.file_list:
         print d
+
+if __name__ == '__main__':
+    pass
+
