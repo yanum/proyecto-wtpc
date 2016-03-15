@@ -47,13 +47,15 @@ class Bird(object):
         if 'time' is set true, return the mean value (of time) for each data of the filtered envalue
         this method is far to be optimal but try to be redeable
         """
-        ndata = self.time. 
+        # number of data per window
+        ndata = len(self.time[0])/windowLength
         #taking the absolut value 
-        absSignal = np.fabs(sample)
-        envelope = np.array([ np.amax(absSignal[w:w+windowLenght])\
-                for w in range(absSignal.shape/windowLength)])
-        envelope = np.array([ np.amax(self.time[w:w+windowLenght])\
-                for w in range(self.time.shape/windowLength)])
+        absSignal = np.fabs(self.sample)
+        
+        envelope = np.array([[ np.amax( signal[w:w+windowLenght])\
+                for w in range(ndata)] for signal in absSignal])
+        envelope = np.array([[ np.amax(self.time[w:w+windowLenght])\
+                for w in range(ndata)] for data in self.time])
 
 
         return envelopeTime, envelope, 'envelope'
