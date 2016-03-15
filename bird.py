@@ -28,7 +28,6 @@ class Bird(object):
             ndata += 1
 
 
-        print 'asdasd', self.sample[:ndata]
         totalWindows = len(self.time)/ndata
         self.time = self.time[:totalWindows*ndata]
         self.sample = self.sample[:totalWindows*ndata]
