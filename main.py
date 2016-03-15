@@ -23,7 +23,6 @@ if __name__ == '__main__':
         print args.audio_folder
         audio_files = DF.Discover_Files(args.audio_folder)
         audio_files.get_paths()
-        print (audio_files.file_list)
     else:
         print "Give me a folder, please!"
         sys.exit(1)

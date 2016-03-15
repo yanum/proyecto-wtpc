@@ -26,11 +26,14 @@ class Bird(object):
         Read a wav file and convert it to an array (sample)
         Saves also the sample rate (int)'''
         """
-        (self.rate,self.sample) = wav.read(outWavFile)
-
-        self.time = np.arange(len(self.sample))/float(self.rate)
+        try:
+            (self.rate,self.sample) = wav.read(outWavFile)
+            self.time = np.arange(len(self.sample))/float(self.rate)
         
-        self.__create_windows__(windowDT)
+            self.__create_windows__(windowDT)
+        except:
+            pass
+
 
 
     
