@@ -1,4 +1,3 @@
-
 import numpy as np
 
 import scipy.io.wavfile as wav
@@ -13,7 +12,7 @@ class Bird(object):
         self.dir = bird_dict['path']            # absolute path of dir
         self.audio = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
-        self.bird_image = bird_dict['imagen_name']   # image filename
+        self.bird_image = bird_dict['image_name']   # image filename
 
         """
         Read audio files (.mp3 or .wav) 
@@ -36,9 +35,14 @@ class Bird(object):
 
     
     def __create_windows__(self, windowDT):
-        ndata = 0
-        while self.time[ndata] < windowDT :
-            ndata += 1
+        if self.time[-1] > windowDT:
+            ndata = 0
+            while self.time[ndata] < windowDT :
+                ndata += 1
+
+        else:
+            print 'changing windows size to {}'.format(self.time[-1])
+            ndata = len(self.time)
 
 
         totalWindows = len(self.time)/ndata
@@ -50,7 +54,7 @@ class Bird(object):
 
 
 
-    def set_envelope(self):
+    def get_envelope(self, windowTimeLength = 5, ):
         pass
 
     def set_sonogram(self):
@@ -58,5 +62,4 @@ class Bird(object):
     
     def set_timeserie(self):
         pass
-
 

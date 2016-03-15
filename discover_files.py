@@ -7,8 +7,6 @@ import sys
 import re
 import time
 import subprocess
-from pydub import AudioSegment
-
 
 # input() workaround to support Python 2. Python 3 renamed raw_input() => input().
 # Alias input() to raw_input() if raw_input() exists (Python 2).
@@ -102,5 +100,5 @@ def test():
         print d
 
 if __name__ == '__main__':
-    pass
+    test()
 
