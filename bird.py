@@ -9,18 +9,20 @@ class Bird(object):
     """
     def __init__(self, bird_dict):
         self.dir = bird_dict['path']            # absolute path of dir
-    	self.wav = bird_dict['filename']        # wav filename
+        self.wav = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
         self.bird_image = bird_dict['imagen_name']   # image filename
-	    if self.wav == 'mp3':
+        if self.wav == 'mp3':
             mp3_to_wav(self)
         (self.rate,self.sample) = wav.read(self.dir+self.wav)
 
-    def mp3_to_wav(self)
+    def mp3_to_wav(self):
         pass
 
-    def get_envelope(self, windowLength = 50, time=False, lowPassFilter=False, plot=False):
+
+    def get_envelope(self, windowTimeLength = 5, ):
         """
+        windowTimeLength in seconds
         return the envelope of the sample/s. 
         First take a filter and take the absolut value, 
         next create an array with the maximum value per "time" of all the samples
@@ -29,26 +31,21 @@ class Bird(object):
         if 'time' is set true, return the mean value (of time) for each data of the filtered envalue
         this method is far to be optimal but try to be redeable
         """
-        #filtering the signal (maybe this should be another method)
-        filteredSignal = self.sample
-        if lowPassFilter:
-            pass
+        ndata=0
+        while self.time[ndata] < windowTimeLength/self.rate :
+            ndata += 1
+
+        totalWindows = len(self.time)/ndata
+        
+        sample = self.sample[:totalWindows*ndata]
+        time = self.time[:totalWindows*ndata]
+        
         #taking the absolut value 
-        absSignal = np.fabs(filteredSignal)
+        absSignal = np.fabs(sample)
         maximumSignal = np.maximum(absSignal)
-        envelope = np.array([ np.amax(maximumSignal[w:w+windowLenght])\
-                for w in range(maximumSignal.shape/windowLength)])
 
-        if time:
-            pass
-#           envelopeTime = np.array([np.mean(self.time[w:w+windowLength]\
-#                       for w in range(maximumSignal.shape/windowLength)])
-        else:
-            envelopeTime = np.array([i in range(envelope.shape)])
-
-        if plot:
-            # if plot then return plot object (not sure if this could be done)
-            pass
+        envelope = maximumSignal.resharp((totalWindows,ndata))
+        envelopeTime = time.resharp((totalWindows,ndata))
 
         return envelopeTime, envelope, 'envelope'
 
