@@ -10,7 +10,7 @@ class Bird(object):
         self.dir = bird_dict['path']            # absolute path of dir
         self.audio = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
-        self.bird_image = bird_dict['imagen_name']   # image filename
+        self.bird_image = bird_dict['image_name']   # image filename
         if self.audio == 'mp3':
             mp3_to_wav(self)
         (self.rate,self.sample) = wav.read(self.dir+self.audio)

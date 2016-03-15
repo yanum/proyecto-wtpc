@@ -1,5 +1,7 @@
 import argparse
 import discover_files as DF
+import sys
+import bird as bd
 
 
 
@@ -24,5 +26,8 @@ if __name__ == '__main__':
         print (audio_files.file_list)
     else:
         print "Give me a folder, please!"
+        sys.exit(1)
 
-
+   
+    for dict in audio_files.file_list:
+        bd.Bird(dict, windowDT=.5 )
