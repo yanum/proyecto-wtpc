@@ -30,4 +30,4 @@ if __name__ == '__main__':
 
    
     for dict in audio_files.file_list:
-        bd.Bird(dict, windowDT=.5 )
+        bd.Bird(dict, windowDT= 1 )
