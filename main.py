@@ -1,5 +1,7 @@
 import argparse
 import discover_files as DF
+import sys
+import bird as bd
 
 
 
@@ -21,8 +23,17 @@ if __name__ == '__main__':
         print args.audio_folder
         audio_files = DF.Discover_Files(args.audio_folder)
         audio_files.get_paths()
-        print (audio_files.file_list)
     else:
         print "Give me a folder, please!"
+        sys.exit(1)
 
+   
+    for dict in audio_files.file_list:
+        pajarito = bd.Bird(dict, windowDT= 10000 )
+        if pajarito.read_wav():
+            print pajarito.bird_name, pajarito.audio
+            (sertemp, seriedato, nombre) = pajarito.get_envelope()
+            print sertemp
+            print seriedato
+            print nombre
 
