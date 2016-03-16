@@ -12,6 +12,11 @@
 
 ### Flujo de trabajo
 
+#### Gestor de tareas
+
+Se usó [trello](https://trello.com/) para hacer un seguimiento de las
+tareas asignadas.
+
 #### Rama master
 Mantiene la versión estable del proyecto
 
