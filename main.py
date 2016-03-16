@@ -2,7 +2,7 @@ import argparse
 import discover_files as DF
 import sys
 import bird as bd
-
+import plotting 
 
 
 '''
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
    
     for dict in audio_files.file_list:
-        pajarito = bd.Bird(dict, windowDT= 10000 )
+        pajarito = bd.Bird(dict, windowDT= 1 )
         if pajarito.read_wav():
             print pajarito.bird_name, pajarito.audio
             (sertemp, seriedato, nombre) = pajarito.get_envelope()
@@ -37,3 +37,13 @@ if __name__ == '__main__':
             print seriedato
             print nombre
 
+	envelope = { "time":sertemp, "sample":seriedato, "rutine":"frecVsTime"}
+	print envelope
+
+	plotting.plot(envelope)
+
+
+
+
+
+	break
