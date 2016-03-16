@@ -93,9 +93,9 @@ class Bird(object):
             #ignore it
             pass
 
-
         return envelopeTime, envelope, 'envelope'
-    def set_sonogram(self):
+
+def set_sonogram(self):
         pass
     
     def set_timeserie(self):
