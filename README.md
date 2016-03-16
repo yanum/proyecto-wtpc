@@ -12,11 +12,28 @@
 
 ### Módulos
 
-* bird.py  
+* bird.py
+   depende de:
+   * numpy
+   * scipy
+   * mp3ToWav
 
 * discover_files.py  
+   depende de:
+   * os
+   * sys
+
+  
 
 * main.py  
+   depende de:
+   * bird
+   * sys
+
 
 * mp3ToWav.py
+   depende de:
+   * os
+   * pydub
+
 
