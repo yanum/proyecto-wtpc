@@ -13,29 +13,32 @@ class Bird(object):
         self.audio = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
         self.bird_image = bird_dict['image_name']   # image filename
-
+        self.windowDT = windowDT
         """
         Read audio files (.mp3 or .wav) 
         If audio file is a .mp3 it converts it to .wav format
         Returns a wav file: outWavFile 
         """
         mtow = mp3ToWav.Mp3ToWav()
-        outWavFile = mtow.convert(self.audio,self.dir)
+        self.outWavFile = mtow.convert(self.audio,self.dir)
 
         """
         Read a wav file and convert it to an array (sample)
         Saves also the sample rate (int)'''
         """
-        try:
-            (self.rate,self.sample) = wav.read(outWavFile)
+    def read_wav(self):
+        try: 
+            (self.rate,self.sample) = wav.read(self.outWavFile)
             self.time = np.arange(len(self.sample))/float(self.rate)
         
-            self.__create_windows__(windowDT)
-        except:
-            pass
+            self.__create_windows__(self.windowDT)
+            return True
+        except TypeError:
+            print 'error en conversion'
+            return  False
 
 
-
+        
     
     def __create_windows__(self, windowDT):
         if self.time[-1] > windowDT:
