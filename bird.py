@@ -41,31 +41,61 @@ class Bird(object):
 
 
 
-    def get_envelope(self, windowLength = 20, ):
+    def get_envelope(self, windowSize = 25 ):
         """
-        windowTimeLength in seconds
         return the envelope of the sample/s. 
-        First take a filter and take the absolut value, 
-        next create an array with the maximum value per "time" of all the samples
-        then reduce the data number with a factor 'windowLengh'
-        and finally return the filtered envelope
-        if 'time' is set true, return the mean value (of time) for each data of the filtered envalue
-        this method is far to be optimal but try to be redeable
+        First take a filter and take the absolut value, next create an array 
+        with the maximum value per "time" of all the samples then reduce the 
+        data number with a factor 'windowLengh' and finally return the filtered
+        envelope if 'time' is set true, return the mean value (of time) for
+        each data of the filtered envalue
+        This method is far to be optimal but try to be redeable
+
+        windowSize: number of data in each window
         """
-        # number of data per window
-        ndata = len(self.time[0])/windowLength
+        # nWindows: number of full windows in the array
+        # rest: number of data that doesnt fill the last window
+        # nData: number of data in full windows
+        nWindows = len(self.time[0])/windowSize
+        rest  = len(self.time[0]) % windowSize
+        nData = nWindows*windowSize
+
+
         #taking the absolut value 
         absSignal = np.fabs(self.sample)
-        
-        envelope = np.array([[ np.amax( signal[w:w+windowLenght])\
-                for w in range(ndata)] for signal in absSignal])
-        envelope = np.array([[ np.amax(self.time[w:w+windowLenght])\
-                for w in range(ndata)] for data in self.time])
+        # windows: return list of samples. Each sample is splited in nWindows
+        #          windows
+        # lastWindow: return a list of the last window of each sample
+        #             The shape of this array should be (len(self.sample),rest)
+        windows    = np.split(absSignal[:,:nData],nWindows,axis=1)
+        lastWindow = absSignal[:,nData:]
+        windowsTime    = np.split(self.time[:,:nData],nWindows,axis=1)
+        lastWindowTime = self.time[:,nData:]
 
+        # the first line take the maximum value of each window of each sample
+        # the next line stack all the maximum values 'as it should be'
+        envelope = np.amax(windows,axis=2)
+        envelope = np.stack(envelope,axis=1)
+        # in the case of the time we take the mean value of each window
+        envelopeTime = np.mean(windowsTime,axis=2)
+        envelopeTime = np.stack(envelopeTime,axis=1)
+
+        # evaluate the maximum value of the last window of each sample
+        # returning a row array. The reshape transform the row array to
+        # column array to appending to envelope
+        try:
+            lastData = np.amax(lastWindow, axis=1).reshape(len(self.sample),1)
+            lastDataTime = np.mean(lastWindowTime,axis=1).reshape(len(self.time),1)
+            envelope = np.append(envelope,lastData,axis=1)
+            envelopeTime = np.append(envelopeTime,lastDataTime,axis=1)
+        except ValueError:
+            #lastData is empty list. numpy cant do anything with this, so we
+            #ignore it
+            pass
 
         return envelopeTime, envelope, 'envelope'
 
-    def set_sonogram(self):
+def set_sonogram(self):
         pass
     
     def set_timeserie(self):
