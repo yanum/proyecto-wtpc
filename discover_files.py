@@ -15,7 +15,9 @@ try:
 except NameError:
     pass
 
-
+'''
+Discover_Files : a class to discover files by type
+'''
 class Discover_Files(object):
 
     def __init__(self, root_dir, first_level_dir='./', files_extensions=['mp3', 'wav', 'aif', 'ogg']):
