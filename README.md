@@ -14,7 +14,7 @@
 
 #### Gestor de tareas
 
-Se usó [trello](https://trello.com/) para hacer un seguimiento de las
+Se usó [trello](https://trello.com/b/G4BWlpfO/pajaritos) para hacer un seguimiento de las
 tareas asignadas.
 
 #### Rama master
