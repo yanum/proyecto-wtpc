@@ -1,12 +1,21 @@
+#!/bin/python2
 import bird 
-
-dic = {'path': './albanella/','filename':'call2.wav','especie':'albanella','imagen_name':'albanellaM.jpg'}
+import matplotlib.pyplot as plt
+dic = {'path': './audioFiles/albanella/','filename':'call2.wav','especie':'albanella','image_name':'albanellaM.jpg'}
 
 pajaro = bird.Bird(dic,1)
 
-print pajaro.time
-print pajaro.sample
+#print pajaro.time
+#print pajaro.sample
 
-envelope = pajaro.get_envelope()
+envelopeTime,envelope,name = pajaro.get_envelope(23)
 
-print envelope
+print pajaro.time.shape, pajaro.sample.shape
+print envelope.shape, envelopeTime.shape
+
+
+for i in range(len(pajaro.time)):
+    plt.plot( envelopeTime[i], envelope[i])
+    plt.plot( pajaro.time[i], pajaro.sample[i])
+#plt.plot(envelopeTime,envelope)
+plt.show()
