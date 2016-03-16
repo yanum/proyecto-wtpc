@@ -21,6 +21,13 @@ Discover_Files : a class to discover files by type
 class Discover_Files(object):
 
     def __init__(self, root_dir, first_level_dir='./', files_extensions=['mp3', 'wav', 'aif', 'ogg']):
+        '''
+          Discover_Files constructor
+          Parameters:
+                root_dir:  a folder to search for files
+                first_level_dir:  a folder after root_dir
+                files_extensions: a list of files extensions
+        '''
         self.root_dir = root_dir
 	self.first_level_dir = first_level_dir
 	self.files_extensions = files_extensions
@@ -30,6 +37,11 @@ class Discover_Files(object):
 
 
     def get_paths(self):
+        '''
+           recursively determine the discovered files path
+           the method create a list of dictionaries that
+           have the files information
+        '''
         # Get the absolute path of the movie_directory parameter
         movie_directory = os.path.abspath(self.files_directory)
 
@@ -92,7 +104,10 @@ class Discover_Files(object):
 		self.files_directory = filepath
                 self.get_paths()
 
-def test():
+def verify():
+    '''
+        a very simple method to verify the class
+    '''
     DF = Discover_Files("./audioFiles" )
     DF.get_paths()
 
@@ -102,5 +117,5 @@ def test():
         print d
 
 if __name__ == '__main__':
-    test()
+    verify()
 

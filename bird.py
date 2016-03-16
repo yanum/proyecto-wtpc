@@ -22,11 +22,11 @@ class Bird(object):
         mtow = mp3ToWav.Mp3ToWav()
         self.outWavFile = mtow.convert(self.audio,self.dir)
 
+    def read_wav(self):
         """
         Read a wav file and convert it to an array (sample)
         Saves also the sample rate (int)'''
         """
-    def read_wav(self):
         try: 
             (self.rate,self.sample) = wav.read(self.outWavFile)
             self.time = np.arange(len(self.sample))/float(self.rate)
@@ -41,6 +41,10 @@ class Bird(object):
         
     
     def __create_windows__(self, windowDT):
+        '''
+        __create_windows__ a private method to create windows for
+        processing the signal
+        '''
         if self.time[-1] > windowDT:
             ndata = 0
             while self.time[ndata] < windowDT :
