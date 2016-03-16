@@ -41,8 +41,29 @@ class Bird(object):
 
 
 
-    def get_envelope(self, windowTimeLength = 5, ):
-        pass
+    def get_envelope(self, windowLength = 20, ):
+        """
+        windowTimeLength in seconds
+        return the envelope of the sample/s. 
+        First take a filter and take the absolut value, 
+        next create an array with the maximum value per "time" of all the samples
+        then reduce the data number with a factor 'windowLengh'
+        and finally return the filtered envelope
+        if 'time' is set true, return the mean value (of time) for each data of the filtered envalue
+        this method is far to be optimal but try to be redeable
+        """
+        # number of data per window
+        ndata = len(self.time[0])/windowLength
+        #taking the absolut value 
+        absSignal = np.fabs(self.sample)
+        
+        envelope = np.array([[ np.amax( signal[w:w+windowLenght])\
+                for w in range(ndata)] for signal in absSignal])
+        envelope = np.array([[ np.amax(self.time[w:w+windowLenght])\
+                for w in range(ndata)] for data in self.time])
+
+
+        return envelopeTime, envelope, 'envelope'
 
     def set_sonogram(self):
         pass
