@@ -1,3 +1,5 @@
 Audio_canary
 *.pyc
 albanella
+specgram_demo.py
+*.swp
