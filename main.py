@@ -29,4 +29,9 @@ if __name__ == '__main__':
 
    
     for dict in audio_files.file_list:
-        bd.Bird(dict, windowDT= 1 )
+        pajarito = bd.Bird(dict, windowDT= 1 )
+        (sertemp, seriedato, nombre) = pajarito.get_envelope()
+        print sertemp
+        print seriedato
+        print nombre
+
