@@ -1,5 +1,5 @@
-""" This routine make the plots, it received the plot class
-    frecVsTime, or envelope or sonogram and it save the plots
+""" This routine makes the plots, it receives the plot class
+    frecVsTime, or envelope or sonogram and it saves the plots
 """
 
 # Here we load the libraries needed 
