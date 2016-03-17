@@ -30,17 +30,15 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
    
     for dict in audio_files.file_list:
-        pajarito = bd.Bird(dict, windowDT= 3 )
+        pajarito = bd.Bird(dict, windowDT= 5 )
         if pajarito.is_working:
             print pajarito.bird_name, pajarito.audio
-            env = pajarito.get_envelope()
+            env = pajarito.get_envelope(50)
             
-            fft = pajarito.get_fft()
-            periodogram = pajarito.get_periodogram()
+#            fft = pajarito.get_fft()
+#            periodogram = pajarito.get_periodogram()
             frecvstime = pajarito.get_frecVsTime()
-            plt.plot(periodogram['time'],periodogram['sample'])
-            plt.show()
 
-            plotting.plot(env)
-            plotting.plot( frecvstime)
+#            plotting.plot(env)
+#            plotting.plot( frecvstime)
             #plotting.plot(sonogram)
