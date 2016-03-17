@@ -17,7 +17,7 @@ class Bird(object):
         self.sample = []
         self.windowsTime = []
         self.windowsSample = []
-        
+        self.is_working = False                 
         
         
         """
@@ -28,40 +28,51 @@ class Bird(object):
         mtow = mp3ToWav.Mp3ToWav()
         outWavFile = mtow.convert(self.audio,self.dir)
 
-        """
-        Read a wav file and convert it to an array (sample)
-        Saves also the sample rate (int)'''
-        """
         try: 
+            # Read a wav file and return the rate & sample as numpy.array
             (self.rate,self.sample) = wav.read(outWavFile)
+            # create and array of time from knowing the frequency rate and the
+            # number of data of the sample
             self.time = np.arange(len(self.sample))/float(self.rate)
-        
+            # divide the sample & time arrays in windows of timeSize = windowDT
             self.__create_windows__(windowDT)
-            return True
+            self.is_working = True
         except TypeError:
             print 'error en conversion'
-            return  False
-
+            self.is_working =  False
 
         
     
     def __create_windows__(self, windowDT):
+        """
+        divide the sample & time arrays in windows of timeSize = windowDT
+        doesn't delete the sample & time arrays
+        """
+        
         if self.time[-1] > windowDT:
             ndata = 0
             while self.time[ndata] < windowDT :
                 ndata += 1
 
         else:
+            # if the windowDT is bigger than the max time of the sample
             print 'changing windows size to {}'.format(self.time[-1])
             ndata = len(self.time)
 
-
+        
         totalWindows = len(self.time)/ndata
         self.windowsTime = self.time[:totalWindows*ndata]
         self.windowsSample = self.sample[:totalWindows*ndata]
 
+        # the total data inside windowed arrays is <= than the 'real one'
+        # this 'cause we dont want to handle with different sizes of windows
+        # (thinking in the end of data that don't fill the last window
         self.windowsTime = self.time.reshape((totalWindows,ndata))
         self.windowsSample = self.sample.reshape((totalWindows,ndata))
+
+        # not sure if this can happend
+        if self.windowsTime.ndim is not 2:
+            raise Exception("the dimension of the windowed arrays should be 2")
 
 
 
