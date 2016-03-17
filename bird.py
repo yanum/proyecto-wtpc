@@ -19,7 +19,7 @@ class Bird(object):
         self.windowsTime = []
         self.windowsSample = []
         self.is_working = False                 
-	    self.frecVsTime={} #empty dictionary 
+        self.frecVsTime={} #empty dictionary 
         self.envelope = {}
         self.sonogram = {}
         """
