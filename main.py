@@ -37,13 +37,22 @@ if __name__ == '__main__':
             print seriedato
             print nombre
 
-	envelope = { "time":sertemp, "sample":seriedato, "rutine":"frecVsTime"}
+	envelope = { "time":sertemp, "sample":seriedato, "rutine":"envelope"}
 	print envelope
 
 	plotting.plot(envelope)
 
+        
+        signal = { "time":sertemp, "sample":seriedato, "rutine":"frecVsTime"}
+	print signal
+        
+        plotting.plot(signal)
 
+        rate = 8000
 
+        sonogram = { "time":sertemp, "sample":seriedato, "rate":rate, "rutine":"sonogram"}
+	print envelope 
 
-
+        plotting.plot(sonogram)
 	break
+
