@@ -2,7 +2,7 @@ import argparse
 import discover_files as DF
 import sys
 import bird as bd
-
+import plotting 
 
 
 '''
@@ -41,4 +41,6 @@ if __name__ == '__main__':
             plt.plot(periodogram['time'],periodogram['sample'])
             plt.show()
 
-
+            plotting.plot(env)
+            plotting.plot( frecvstime)
+            #plotting.plot(sonogram)
