@@ -3,7 +3,7 @@ import numpy as np
 import scipy.io.wavfile as wav
 import mp3ToWav
 
-import aux-functions as aux-f
+import aux_functions as aux
 class Bird(object):
     """
     Modulo de objeto de pajaro.
@@ -80,8 +80,8 @@ class Bird(object):
 
 
     def get_envelope(self, windowSize = 25 ):
-        envelope = aux-f.envelope(self.windowSample, windowSize)
-        envelopeTime = aux-f.meanFilter(self.windowsTime, windowSize)
+        envelope = aux.envelope(self.windowsSample, windowSize)
+        envelopeTime = aux.meanFilter(self.windowsTime, windowSize)
         self.envelope = {'time':envelopeTime,'sample':envelope,'rutine':'envelope'}
         return self.envelope
 
