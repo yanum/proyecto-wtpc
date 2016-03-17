@@ -1,9 +1,9 @@
 import numpy as np
-
 import scipy.io.wavfile as wav
 import mp3ToWav
-
 import aux_functions as aux
+
+
 class Bird(object):
     """
     Modulo de objeto de pajaro.
@@ -19,8 +19,7 @@ class Bird(object):
         self.windowsTime = []
         self.windowsSample = []
         self.is_working = False                 
-        
-        
+	self.frecVsTime={} #empty dictionary 
         """
         Read audio files (.mp3 or .wav) 
         If audio file is a .mp3 it converts it to .wav format
@@ -88,6 +87,9 @@ class Bird(object):
     def set_sonogram(self):
         pass
     
-    def set_timeserie(self):
-        pass
+    def set_frecVsTime(self): 
+	# dictionary with info for plotting 
+	 self.frecVsTime= {"time":self.time, "sample": self.sample, "rutine": "frecVsTime"}
+   	  
+	 return self.frec_vs_time
 
