@@ -1,5 +1,7 @@
 from scipy import signal
-
+'''
+Author: lmpizarro
+'''
 class Periodogram(object):
     '''
     A class to calc periodograms of a signal
