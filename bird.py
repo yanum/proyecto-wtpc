@@ -3,6 +3,7 @@ import scipy.io.wavfile as wav
 import mp3ToWav
 import aux_functions as aux
 
+import fFourierTransform as fft
 
 class Bird(object):
     """
@@ -10,6 +11,7 @@ class Bird(object):
     Aqui se obtienen las propiedades del canto
     """
     def __init__(self, bird_dict, windowDT=1):
+        print "="*80
         self.dir = bird_dict['path']            # absolute path of dir
         self.audio = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
@@ -22,6 +24,7 @@ class Bird(object):
         self.frecVsTime={} #empty dictionary 
         self.envelope = {}
         self.sonogram = {}
+        self.fft = {}
         """
         Read audio files (.mp3 or .wav) 
         If audio file is a .mp3 it converts it to .wav format
@@ -29,7 +32,6 @@ class Bird(object):
         """
         mtow = mp3ToWav.Mp3ToWav()
         outWavFile = mtow.convert(self.audio,self.dir)
-
         try: 
             # Read a wav file and return the rate & sample as numpy.array
             (self.rate,self.sample) = wav.read(outWavFile)
@@ -37,13 +39,15 @@ class Bird(object):
             # number of data of the sample
             self.time = np.arange(len(self.sample))/float(self.rate)
             # divide the sample & time arrays in windows of timeSize = windowDT
-            self.__create_windows__(windowDT)
             self.is_working = True
+            self.__create_windows__(windowDT)
         except TypeError:
             print 'Error in convertion of {}/{}'.format(self.bird_name,self.audio)
             self.is_working =  False
-
-        
+        except:
+            print "i dont know how to handle this !!"
+            self.is_working = False
+       
     
     def __create_windows__(self, windowDT):
         """
@@ -63,7 +67,6 @@ class Bird(object):
             print 'changing windows size to {}'.format(self.time[-1])
             ndata = len(self.time)
 
-        
         totalWindows = len(self.time)/ndata
         self.windowsTime = self.time[:totalWindows*ndata]
         self.windowsSample = self.sample[:totalWindows*ndata]
@@ -72,8 +75,8 @@ class Bird(object):
         # this 'cause we dont want to handle with different sizes of windows
         # (thinking in the end of data that don't fill the last window
         try:
-            self.windowsTime = self.time.reshape((totalWindows,ndata))
-            self.windowsSample = self.sample.reshape((totalWindows,ndata))
+            self.windowsTime = self.windowsTime.reshape((totalWindows,ndata))
+            self.windowsSample = self.windowsSample.reshape((totalWindows,ndata))
         except ValueError:
             print "Cant handle the resharp if windowDT is bigger than \
 max time of the sample {}/{}".format(self.bird_name,self.audio)
@@ -81,7 +84,12 @@ max time of the sample {}/{}".format(self.bird_name,self.audio)
         # not sure if this can happend
         #if self.windowsTime.ndim is not 2:
         #    raise Exception("the dimension of the windowed arrays should be 2")
-
+        if self.windowsSample.ndim is not 2:
+            print "windowsSample.ndim is not 2"
+            self.is_working = False
+        if self.windowsTime.ndim is not 2:
+            print "windowsTime.ndim is not 2"
+            self.is_working = False
 
 
     def get_envelope(self, windowSize = 25 ):
@@ -97,6 +105,13 @@ max time of the sample {}/{}".format(self.bird_name,self.audio)
     
     def get_frecVsTime(self): 
         # dictionary with info for plotting 
-        self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample, "rutine": "frecVsTime"}
+        self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample,
+        "rutine": "frecVsTime"}
         return self.frecVsTime
 
+    def get_fft(self):
+        sampleFFT = fft.fFourierTransform()
+        sampleFFT.meanFFT(self.windowsSample)
+        self.fft = sampleFFT.fft_dict
+        return self.fft
+       

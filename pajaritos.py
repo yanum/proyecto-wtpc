@@ -27,20 +27,17 @@ if __name__ == '__main__':
         print "Give me a folder, please!"
         sys.exit(1)
 
-    
+    import matplotlib.pyplot as plt
    
     for dict in audio_files.file_list:
-        pajarito = bd.Bird(dict, windowDT= 1 )
+        pajarito = bd.Bird(dict, windowDT= 3 )
         if pajarito.is_working:
             print pajarito.bird_name, pajarito.audio
-            pajarito_env = pajarito.get_envelope()
-            sertemp = pajarito_env['time']
-            seriedato = pajarito_env['sample']
-            nombre = pajarito_env['rutine']
-            print sertemp
-            print seriedato
-            print nombre
-            dictdata = pajarito.get_frecVsTime()
-            print dictdata
+            env = pajarito.get_envelope()
+            
+            fft = pajarito.get_fft()
+            frecvstime = pajarito.get_frecVsTime()
+            plt.plot(fft['time'],fft['sample'])
+            plt.show()
 
 

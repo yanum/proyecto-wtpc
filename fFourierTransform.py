@@ -11,10 +11,10 @@ import scipy.fftpack as fft
 
 class fFourierTransform(object):
 
-    def fFourierTransform(self, windowsSample):
+    def meanFFT(self, windowsSample):
         self.windowsSample = windowsSample
 
-	modtf = []
+        modtf = []
         # Arbitrary timestep to creat frequency array for future periodogram graphs
         timestep = 0.1
 
@@ -33,12 +33,12 @@ class fFourierTransform(object):
 
         #Because the periodogram result is folded (like a mirror), only save n/2 values
         self.modulo_Transf_Fourier_Average_de_Windows = (reduce_fft [:len(reduce_fft) / 2])
-        return self.modulo_Transf_Fourier_Average_de_Windows self.freq
+        self.freq = self.freq[: len(self.freq)/2]
+        self.fft_dict = {"time":self.freq,"sample":self.modulo_Transf_Fourier_Average_de_Windows,"routine": "fFourierTransform"}
+        
+        return self.modulo_Transf_Fourier_Average_de_Windows, self.freq
 
-    def fft(self): 
 	
-        self.fft = {"time":self.freq,"sample":self.modulo_Transf_Fourier_Average_de_Windows,"routine": "fFourierTransform"}
-        return self.fft
 
 
 # Test 
@@ -46,9 +46,13 @@ def test():
     import matplotlib.pyplot as plt  
     fft_out = fFourierTransform()
     windowSample = np.random.random_sample((6, 600))
-    fft_out.fFourierTransform(windowSample)
-    fft_out.fft()
-    plt.plot(fft_out.fft['time'],fft_out.fft['sample'])
+    fft_out.meanFFT(windowSample)
+
+    print ""
+    print fft_out.fft_dict['time'].shape, fft_out.fft_dict['sample'].shape 
+    print ""
+
+    plt.plot(fft_out.fft_dict['time'],fft_out.fft_dict['sample'])
     plt.show()
 
 
