@@ -14,6 +14,7 @@ class Bird(object):
         self.bird_name = bird_dict['especie']   # directory name
         self.bird_image = bird_dict['image_name']   # image filename
         self.windowDT = windowDT
+	self.frecVsTime={} #empty dictionary 
         """
         Read audio files (.mp3 or .wav) 
         If audio file is a .mp3 it converts it to .wav format
@@ -117,12 +118,9 @@ class Bird(object):
     def set_sonogram(self):
         pass
     
-    def frec_vs_time(self): 
-	
-   	 fig=plot(self.time,self.sample,label='Time Signal')  # PLot frecuency vr time
-
-   	 grid(True)
-   	 pylab.xlabel("time [s]") # Label of axis x
-   	 pylab.ylabel("Amplitde") # Label or axis y
-	 return fig
+    def set_frecVsTime(self): 
+	# dictionary with info for plotting 
+	 self.frecVsTime= {"time":self.time, "sample": self.sample, "rutine": "frecVsTime"}
+   	  
+	 return self.frec_vs_time
 
