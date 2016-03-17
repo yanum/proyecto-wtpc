@@ -19,7 +19,9 @@ class Bird(object):
         self.windowsTime = []
         self.windowsSample = []
         self.is_working = False                 
-	self.frecVsTime={} #empty dictionary 
+	    self.frecVsTime={} #empty dictionary 
+        self.envelope = {}
+        self.sonogram = {}
         """
         Read audio files (.mp3 or .wav) 
         If audio file is a .mp3 it converts it to .wav format
@@ -84,12 +86,13 @@ class Bird(object):
         self.envelope = {'time':envelopeTime,'sample':envelope,'rutine':'envelope'}
         return self.envelope
 
-    def set_sonogram(self):
-        pass
+    def get_sonogram(self):
+        self.sonogram = {'time': self.windowsTime, 'sample': self.windowsSample, 'rate':self.rate, "rutine":'sonogram'}
+        return self.sonogram
     
     def set_frecVsTime(self): 
 	# dictionary with info for plotting 
-	 self.frecVsTime= {"time":self.time, "sample": self.sample, "rutine": "frecVsTime"}
+	 self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample, "rutine": "frecVsTime"}
    	  
 	 return self.frec_vs_time
 
