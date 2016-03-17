@@ -161,6 +161,7 @@ def meanFilter(signals,windowSize=25):
     return filteredSignal
 
 
+
 if __name__ == '__main__':
     
     signals = np.random.random_sample((6,666))
