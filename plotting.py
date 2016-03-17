@@ -31,12 +31,13 @@ def plot ( rutine , show_plot=True):
         if show_plot == True:
             plt.show()
             
-    else if rutine_name == "sonogram":
+    elif rutine_name == "sonogram":
         fig , ax = plt.subplots()
         sample_rate = rutine ["rate"]
         for i in range (len(axis_x)):
             ax.specgram(axis_y[i],Fs=sample_rate)
             ax.set_ylabel(' Frequencies')
             ax.set_xlabel(' Time (seconds)')
-            ax.colorbar()
+           # ax.colorbar()
             plt.savefig("sonogram_{}".format(i))
+            plt.show()
