@@ -32,8 +32,11 @@ if __name__ == '__main__':
         pajarito = bd.Bird(dict, windowDT= 10000 )
         if pajarito.is_working:
             print pajarito.bird_name, pajarito.audio
-#            (sertemp, seriedato, nombre) = pajarito.get_envelope()
-#            print sertemp
-#            print seriedato
-#            print nombre
+            pajarito_env = pajarito.get_envelope()
+            sertemp = pajarito_env['time']
+            seriedato = pajarito_env['sample']
+            nombre = pajarito_env['rutine']
+            print sertemp
+            print seriedato
+            print nombre
 
