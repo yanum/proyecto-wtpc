@@ -93,6 +93,5 @@ class Bird(object):
     def set_frecVsTime(self): 
 	    # dictionary with info for plotting 
 	    self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample, "rutine": "frecVsTime"}
-   	  
-	 return self.frec_vs_time
+        return self.freVsTime
 
