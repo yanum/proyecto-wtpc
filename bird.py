@@ -91,8 +91,8 @@ class Bird(object):
         return self.sonogram
     
     def set_frecVsTime(self): 
-	# dictionary with info for plotting 
-	 self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample, "rutine": "frecVsTime"}
+	    # dictionary with info for plotting 
+	    self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample, "rutine": "frecVsTime"}
    	  
 	 return self.frec_vs_time
 
