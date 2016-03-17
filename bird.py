@@ -40,7 +40,7 @@ class Bird(object):
             self.__create_windows__(windowDT)
             self.is_working = True
         except TypeError:
-            print 'error en conversion'
+            print 'Error in convertion of {}/{}'.format(self.bird_name,self.audio)
             self.is_working =  False
 
         
@@ -71,12 +71,16 @@ class Bird(object):
         # the total data inside windowed arrays is <= than the 'real one'
         # this 'cause we dont want to handle with different sizes of windows
         # (thinking in the end of data that don't fill the last window
-        self.windowsTime = self.time.reshape((totalWindows,ndata))
-        self.windowsSample = self.sample.reshape((totalWindows,ndata))
-
+        try:
+            self.windowsTime = self.time.reshape((totalWindows,ndata))
+            self.windowsSample = self.sample.reshape((totalWindows,ndata))
+        except ValueError:
+            print "Cant handle the resharp if windowDT is bigger than \
+max time of the sample {}/{}".format(self.bird_name,self.audio)
+            self.is_working = False
         # not sure if this can happend
-        if self.windowsTime.ndim is not 2:
-            raise Exception("the dimension of the windowed arrays should be 2")
+        #if self.windowsTime.ndim is not 2:
+        #    raise Exception("the dimension of the windowed arrays should be 2")
 
 
 
@@ -87,11 +91,12 @@ class Bird(object):
         return self.envelope
 
     def get_sonogram(self):
-        self.sonogram = {'time': self.windowsTime, 'sample': self.windowsSample, 'rate':self.rate, "rutine":'sonogram'}
+        self.sonogram = {'time': self.windowsTime, 'sample': self.windowsSample,
+                        'rate':self.rate, "rutine":'sonogram'}
         return self.sonogram
     
-    def set_frecVsTime(self): 
-	    # dictionary with info for plotting 
-	    self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample, "rutine": "frecVsTime"}
-        return self.freVsTime
+    def get_frecVsTime(self): 
+        # dictionary with info for plotting 
+        self.frecVsTime= {"time":self.windowsTime, "sample": self.windowsSample, "rutine": "frecVsTime"}
+        return self.frecVsTime
 

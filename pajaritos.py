@@ -40,8 +40,7 @@ if __name__ == '__main__':
             print sertemp
             print seriedato
             print nombre
-	    dictdata = pajarito.get_frecVsTime()
-	    print dictdata
- 	    break
+            dictdata = pajarito.get_frecVsTime()
+            print dictdata
 
 
