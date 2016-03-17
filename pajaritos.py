@@ -36,8 +36,9 @@ if __name__ == '__main__':
             env = pajarito.get_envelope()
             
             fft = pajarito.get_fft()
+            periodogram = pajarito.get_periodogram()
             frecvstime = pajarito.get_frecVsTime()
-            plt.plot(fft['time'],fft['sample'])
+            plt.plot(periodogram['time'],periodogram['sample'])
             plt.show()
 
 

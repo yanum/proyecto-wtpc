@@ -13,6 +13,7 @@ class Periodogram(object):
         rate: the sample rate
         '''
         self.f, self.Pxx_den = signal.periodogram(samples, rate)
+        return self.f, self.Pxx_den
 
 class Crosspower(object):
     '''
@@ -25,6 +26,7 @@ class Crosspower(object):
         rate: the sample rate, must be the same for the 2 arrays
         '''
         self.f, self.Pxx_den = signal.csd(samples, samples2, rate, nperseg = 1024)
+        return self.f, self.Pxx_den
 
 
 def verificar_periodogram():

@@ -4,6 +4,7 @@ import mp3ToWav
 import aux_functions as aux
 
 import fFourierTransform as fft
+import periodogram as period
 
 class Bird(object):
     """
@@ -114,4 +115,13 @@ max time of the sample {}/{}".format(self.bird_name,self.audio)
         sampleFFT.meanFFT(self.windowsSample)
         self.fft = sampleFFT.fft_dict
         return self.fft
-       
+
+    def get_periodogram(self):
+        periodogram = period.Periodogram()
+        pFrec, pDensity = periodogram.calc(self.sample,self.rate)
+        self.periodogram = {'time':pFrec, 'sample':pDensity,
+                        'rutine':'periodogram'}
+
+        return self.periodogram
+
+
