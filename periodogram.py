@@ -1,7 +1,4 @@
-import matplotlib.pyplot as plt
-
 from scipy import signal
-
 
 class Periodogram(object):
     '''
@@ -15,9 +12,22 @@ class Periodogram(object):
         '''
         self.f, self.Pxx_den = signal.periodogram(samples, rate)
 
+class Crosspower(object):
+    '''
+    A class to calc crosspower of 2 signals
+    '''
+    def calc(self, samples, samples2, rate): 
+        '''
+        calc:
+        parameters: samples samples2  the data arrays
+        rate: the sample rate, must be the same for the 2 arrays
+        '''
+        self.f, self.Pxx_den = signal.csd(samples, samples2, rate, nperseg = 1024)
 
-def verificar():
+
+def verificar_periodogram():
     import scipy.io.wavfile as wav
+    import matplotlib.pyplot as plt
     file_name = "audioFiles/albanella/call1.wav" 
     file_name2 = "audioFiles/albanella/call2.wav" 
     file_name3 = "audioFiles/averlaPiccola/call1.wav" 
@@ -51,8 +61,29 @@ def verificar():
     plt.show()
 
 
+def verificar_crosspower():
+    import scipy.io.wavfile as wav
+    import matplotlib.pyplot as plt
+    file_name = "audioFiles/albanella/call1.wav" 
+    file_name2 = "audioFiles/albanella/call2.wav" 
+
+
+    (rate,sample) = wav.read(file_name)
+    (rate2,sample2) = wav.read(file_name2)
+ 
+    cp = Crosspower()
+
+    cp.calc(sample, sample2, rate)
+
+    plt.plot(cp.f, cp.Pxx_den)
+    plt.xlabel('frequency [Hz]')
+    plt.ylabel('PSD [V**2/Hz]')
+    plt.show()
+
+
+
 if __name__ == '__main__':
-    verificar()
+    verificar_crosspower()
 
 
 
