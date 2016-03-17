@@ -7,7 +7,7 @@ containing time, sample (average spectrums), and name of rutine.
 
 import numpy as np
 
-from scipy.fftpack as fft
+import scipy.fftpack as fft
 
 class fFourierTransform(object):
 
@@ -23,7 +23,7 @@ class fFourierTransform(object):
 
             # Calculates for each window the FFT, then the module (real) of the FFT
             # Append to the new list "modtf" moduloTransfFourier for each window sample.
-            tf = fft(window)
+            tf = fft.fft(window)
             modtf.append( tf * np.conj(tf) )
             n = len(window) 
             self.freq = np.fft.fftfreq(n, d=timestep)
@@ -33,21 +33,24 @@ class fFourierTransform(object):
 
         #Because the periodogram result is folded (like a mirror), only save n/2 values
         self.modulo_Transf_Fourier_Average_de_Windows = (reduce_fft [:len(reduce_fft) / 2])
-        return self.modulo_Transf_Fourier_Average_de_Windows
+        return self.modulo_Transf_Fourier_Average_de_Windows self.freq
 
     def fft(self): 
 	
-        self.fft = {"time":self.freq,"sample":self.modulo_Transf_Fourier_Average_de_Windows,"routine": "fFourierTransform")
-        return self.fFT
+        self.fft = {"time":self.freq,"sample":self.modulo_Transf_Fourier_Average_de_Windows,"routine": "fFourierTransform"}
+        return self.fft
 
 
 # Test 
-"""def test():
-       fft_out = fFourierTransform()
-       fft_out.fFourierTransform(windowSample)
+def test():
+    import matplotlib.pyplot as plt  
+    fft_out = fFourierTransform()
+    windowSample = np.random.random_sample((6, 600))
+    fft_out.fFourierTransform(windowSample)
+    fft_out.fft()
+    plt.plot(fft_out.fft['time'],fft_out.fft['sample'])
+    plt.show()
 
 
 if __name__ == '__main__':
     test()
-
-"""
