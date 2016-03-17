@@ -27,9 +27,10 @@ if __name__ == '__main__':
         print "Give me a folder, please!"
         sys.exit(1)
 
+    
    
     for dict in audio_files.file_list:
-        pajarito = bd.Bird(dict, windowDT= 10000 )
+        pajarito = bd.Bird(dict, windowDT= 1 )
         if pajarito.is_working:
             print pajarito.bird_name, pajarito.audio
             pajarito_env = pajarito.get_envelope()
@@ -39,4 +40,8 @@ if __name__ == '__main__':
             print sertemp
             print seriedato
             print nombre
+	    dictdata = pajarito.get_frecVsTime()
+	    print dictdata
+ 	    break
+
 
