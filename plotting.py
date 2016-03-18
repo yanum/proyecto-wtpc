@@ -1,11 +1,12 @@
-""" This routine makes the plots, it receives the plot class
-frecVsTime, or envelope or sonogram and it saves the plots
-"""
 
 # Here we load the libraries needed 
 import matplotlib.pyplot as plt 
 
-def plot ( rutine , show_plot=True):
+def plot ( rutine , show_plot=True, prefix = '',name = '', ext='png'):
+    """ 
+    This routine makes the plots, it receives the plot class
+    frecVsTime, or envelope or sonogram and it saves the plots
+    """
     axis_x = rutine ["time"]
     axis_y = rutine ["sample"]
     rutine_name = rutine["rutine"]
@@ -17,7 +18,7 @@ def plot ( rutine , show_plot=True):
             ax.set_ylabel('Freq (Hz)')
             ax.set_xlabel('Time (seconds)') 
 # We save the plot as .pdf        
-            plt.savefig("signal_vs_time.png")
+            plt.savefig("%ssignal_%s_%03i.%s" % (prefix,name,i,ext) )
             if show_plot == True:
                 plt.show()
     elif rutine_name == "envelope":
@@ -27,7 +28,7 @@ def plot ( rutine , show_plot=True):
             ax.set_ylabel('Envelope Freq (Hz)')
             ax.set_xlabel('Time (seconds)')
 
-            plt.savefig("envelope_of_signal.png")    
+            plt.savefig("%senvelope_%s_%03i.%s" % (prefix,name,i,ext))    
             if show_plot == True:
                 plt.show()
 
@@ -39,27 +40,29 @@ def plot ( rutine , show_plot=True):
             ax.set_ylabel(' Frequencies')
             ax.set_xlabel(' Time (seconds)')
 # ax.colorbar()
-            plt.savefig("sonogram_{}.png".format(i))
-            plt.show()
+            plt.savefig("%ssonogram_%s_%03i.%s" % (prefix,name,i,ext))
+            if show_plot == True:
+                plt.show()
 
     elif rutine_name == "periodogram":
         fig , ax = plt.subplots()
-        for i in range (len(axis_x)):
-            ax.specgram(axis_y[i],Fs=sample_rate)
-            ax.set_ylabel(' Spectral Density')
-            ax.set_xlabel(' Frequency [Hz]')
+        ax.plot(axis_x , axis_y)
+        ax.set_ylabel(' Spectral Density')
+        ax.set_xlabel(' Frequency [Hz]')
 # ax.colorbar()
-            plt.savefig("periodogram_{}.png".format(i))
+        plt.savefig("%speriodogram_%s_.%s" % (prefix,name,ext))
+        if show_plot == True:
             plt.show()
 
     elif rutine_name == "fFourierTransform":
         fig , ax = plt.subplots()
         for i in range (len(axis_x)):
-            ax.specgram(axis_y[i],Fs=sample_rate)
+            ax.plot(axis_x[i] , axis_y[i])
             ax.set_ylabel(' Spectral Density')
             ax.set_xlabel(' ')
 # ax.colorbar()
-            plt.savefig("fft_{}.png".format(i))
-            plt.show()
+            plt.savefig("%sfft_%s_%03i.%s" % (prefix,name,i,ext))
+            if show_plot == True:
+                plt.show()
 
 
