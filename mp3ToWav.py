@@ -14,7 +14,7 @@ class Mp3ToWav(object):
         self.path = path
 
         if self.filename.endswith('mp3'):
-            mp3dir = os.path.join(self.path,"mp3/")
+            mp3dir = os.path.join(self.path,".mp3/")
             # If it doesn't exit, create a directory path+mp3/ to move .mp3 files 
             if not os.path.isdir(mp3dir):
                 os.mkdir(mp3dir)

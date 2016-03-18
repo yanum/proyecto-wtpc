@@ -37,7 +37,7 @@ if __name__ == '__main__':
             envelope = pajarito.get_envelope(50)
 #            raw = pajarito.get_frecVsTime()
 #            sonogram = pajarito.get_sonogram()
-            fft = pajarito.get_fft()
+#            fft = pajarito.get_fft()
             periodogram = pajarito.get_periodogram()
             
             
@@ -47,8 +47,8 @@ if __name__ == '__main__':
                     name=specie+'_'+audioName, show_plot=False)
             plotting.plot(periodogram, prefix = './plots/periodogram/',
                     name=specie+'_'+audioName, show_plot=False)
-            plotting.plot(fft, prefix = './plots/fft_density/',
-                    name=specie+'_'+audioName, show_plot=False)
+#            plotting.plot(fft, prefix = './plots/fft_density/',
+#                    name=specie+'_'+audioName, show_plot=False)
 #            plotting.plot(raw, prefix = './plots/raw/',
 #                    name=specie+'_'+audioName, show_plot=False)
 
