@@ -44,6 +44,7 @@ Cuando las cosas funcionan en esta instancia pasan a testing
 * mp3ToWav : convierte los archivos mp3 (si existen) a wav 
 
 
+
 ### Módulos
 
 * bird.py
@@ -61,7 +62,7 @@ Cuando las cosas funcionan en esta instancia pasan a testing
 
   
 
-* main.py  
+* pajaritos.py  
    depende de:
    * bird: mantiene detalles del canto del ave 
    * sys:
@@ -72,4 +73,10 @@ Cuando las cosas funcionan en esta instancia pasan a testing
    * os:
    * pydub: usado para convertir archivos mp3 a wav
 
+* aux_functions.py: cálculo de envolvente
 
+* fftOperations.py: cálculos relacionados con contenido espectral 
+
+* plotting.py : módulo para graficación  de propiedades de cantos de aves
+
+* setup.py: módulo para la instalación del paquete (incompleto)
