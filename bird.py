@@ -3,8 +3,7 @@ import scipy.io.wavfile as wav
 import mp3ToWav
 import aux_functions as aux
 
-import fFourierTransform as fft
-import periodogram as period
+import fftOperations as fftOps
 
 class Bird(object):
     """
@@ -111,13 +110,13 @@ max time of the sample {}/{}".format(self.bird_name,self.audio)
         return self.frecVsTime
 
     def get_fft(self):
-        sampleFFT = fft.fFourierTransform()
+        sampleFFT = fftOps.fFourierTransform()
         sampleFFT.meanFFT(self.windowsSample)
         self.fft = sampleFFT.fft_dict
         return self.fft
 
     def get_periodogram(self):
-        periodogram = period.Periodogram()
+        periodogram = fftOps.Periodogram()
         pFrec, pDensity = periodogram.calc(self.sample,self.rate)
         self.periodogram = {'time':pFrec, 'sample':pDensity,
                         'rutine':'periodogram'}

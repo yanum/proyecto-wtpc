@@ -29,6 +29,46 @@ class Crosspower(object):
         return self.f, self.Pxx_den
 
 
+"""
+This class calculates Fast Fourier Transform (FFT) for the different windows
+samples. Then calculates the average FFT and returns a dictionary with info
+containing time, sample (average spectrums), and name of rutine.
+"""
+
+import numpy as np
+
+import scipy.fftpack as fft
+
+class fFourierTransform(object):
+
+    def meanFFT(self, windowsSample):
+        self.windowsSample = windowsSample
+
+        modtf = []
+        # Arbitrary timestep to creat frequency array for future periodogram graphs
+        timestep = 0.1
+
+        # This loop goes along each element ("window") in the window sample list
+        for window in self.windowsSample:
+
+            # Calculates for each window the FFT, then the module (real) of the FFT
+            # Append to the new list "modtf" moduloTransfFourier for each window sample.
+            tf = fft.fft(window)
+            modtf.append( tf * np.conj(tf) )
+            n = len(window) 
+            self.freq = np.fft.fftfreq(n, d=timestep)
+            moduloTransfFourier = np.array(modtf)
+        #Calculates the average periodogram for all the window samples
+        reduce_fft = np.mean(moduloTransfFourier,axis = 0)
+
+        #Because the periodogram result is folded (like a mirror), only save n/2 values
+        self.modulo_Transf_Fourier_Average_de_Windows = (reduce_fft [:len(reduce_fft) / 2])
+        self.freq = self.freq[: len(self.freq)/2]
+        self.fft_dict = {"time":self.freq,"sample":self.modulo_Transf_Fourier_Average_de_Windows,"routine": "fFourierTransform"}
+        
+        return self.modulo_Transf_Fourier_Average_de_Windows, self.freq
+
+	
 def verificar_periodogram():
     import scipy.io.wavfile as wav
     import matplotlib.pyplot as plt
@@ -82,6 +122,20 @@ def verificar_crosspower():
     plt.plot(cp.f, cp.Pxx_den)
     plt.xlabel('frequency [Hz]')
     plt.ylabel('PSD [V**2/Hz]')
+    plt.show()
+
+# Test 
+def test_fFourierTransform():
+    import matplotlib.pyplot as plt  
+    fft_out = fFourierTransform()
+    windowSample = np.random.random_sample((6, 600))
+    fft_out.meanFFT(windowSample)
+
+    print ""
+    print fft_out.fft_dict['time'].shape, fft_out.fft_dict['sample'].shape 
+    print ""
+
+    plt.plot(fft_out.fft_dict['time'],fft_out.fft_dict['sample'])
     plt.show()
 
 
