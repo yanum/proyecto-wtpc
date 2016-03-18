@@ -10,6 +10,7 @@
 * Yanina
 * Luis María
 
+
 ### Flujo de trabajo
 
 #### Gestor de tareas
@@ -34,14 +35,6 @@ bugs
 #### Ramas personales
 Rama donde los integrantes del grupo desarrollan sus partes y corrigen bugs.
 Cuando las cosas funcionan en esta instancia pasan a testing
-
-
-
-### Objetos:
-
-* Bird:  encapsula los detalles de un canto de un ave
-* Discover_Files: determina los archivos tipo sonido presentes
-* mp3ToWav : convierte los archivos mp3 (si existen) a wav 
 
 
 
@@ -80,3 +73,24 @@ Cuando las cosas funcionan en esta instancia pasan a testing
 * plotting.py : módulo para graficación  de propiedades de cantos de aves
 
 * setup.py: módulo para la instalación del paquete (incompleto)
+
+
+### Objetos:
+
+* Bird:  encapsula los detalles de un canto de un ave
+* Discover_Files: determina los archivos tipo sonido presentes
+* mp3ToWav : convierte los archivos mp3 (si existen) a wav 
+
+
+
+
+
+###  Números
+
+* Cantidad de líneas de código 885
+* Cantidad de líneas de código por día 177
+* Cantidad de líneas de código por hora 44
+* Cantidad de líneas de código por integrante  177
+* Total de `import`    28
+* Total de funciones definidas   24
+* Total de clases definidas   6
