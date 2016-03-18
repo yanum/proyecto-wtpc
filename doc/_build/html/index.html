@@ -39,6 +39,57 @@
             
   <div class="section" id="welcome-to-pajaritos-s-documentation">
 <h1>Welcome to Pajaritos&#8217;s documentation!<a class="headerlink" href="#welcome-to-pajaritos-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Under construction. Contributions very welcome!</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Director Manager:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li>Cecilia Jarne</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Authors:</th><td class="field-body"><ul class="first simple">
+<li>Raul Barriga</li>
+<li>Adriana Gulisano</li>
+<li>Carla Gulizia</li>
+<li>Luis Pizarro</li>
+<li>Yanina Murua</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Contributors:</th><td class="field-body"><ul class="first simple">
+<li>Franco N. Bellomo</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Sponsor:</th><td class="field-body"><ul class="first simple">
+<li>Workshop en Tecnicas de Programacion Cientifica (WTPC-2016)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Contact:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://wp.df.uba.ar/wtpc">http://wp.df.uba.ar/wtpc</a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Web Site:</th><td class="field-body"><p class="first"><a class="reference external" href="https://github.com/yanum/proyecto-wtpc">https://github.com/yanum/proyecto-wtpc</a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Reviewed:</th><td class="field-body"><p class="first last">2016-03-17</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>DESCRIPTION DEL PROYECTO
+Proyecto especial &#8220;Pajaritos&#8221; en el marco del Workshop en Tecnicas
+de Programacion Cientifica (WTPC) realizado en Buenos Aires, marzo 2016.
+Se analizan distintos cantos de pajaritos en formato .wav y .mp3 convertidos a
+.wav a traves de diversas metodologias estadisticas tales como analisis espectral.</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul class="simple">
@@ -58,8 +109,8 @@
 <dd><p>Modulo de objeto de pajaro.
 Aqui se obtienen las propiedades del canto</p>
 <dl class="attribute">
-<dt id="bird.Bird.frecVsTime">
-<code class="descname">frecVsTime</code><em class="property"> = None</em><a class="headerlink" href="#bird.Bird.frecVsTime" title="Permalink to this definition">¶</a></dt>
+<dt id="bird.Bird.sonogram">
+<code class="descname">sonogram</code><em class="property"> = None</em><a class="headerlink" href="#bird.Bird.sonogram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read audio files (.mp3 or .wav)
 If audio file is a .mp3 it converts it to .wav format
 Returns a wav file: outWavFile</p>
@@ -67,6 +118,45 @@ Returns a wav file: outWavFile</p>
 
 </dd></dl>
 
+<span class="target" id="module-discover_files"></span><dl class="function">
+<dt id="discover_files.verify">
+<code class="descclassname">discover_files.</code><code class="descname">verify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/discover_files.html#verify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#discover_files.verify" title="Permalink to this definition">¶</a></dt>
+<dd><p>a very simple method to verify the class</p>
+</dd></dl>
+
+<span class="target" id="module-mp3ToWav"></span><p>This file enters a filename (&#8220;filename.format_extension&#8221;)
+If the file is not a .wav it convert it to wav format and returns
+the same filename with format extension &#8221;.wav&#8221;</p>
+<span class="target" id="module-periodogram"></span><dl class="class">
+<dt id="periodogram.Crosspower">
+<em class="property">class </em><code class="descclassname">periodogram.</code><code class="descname">Crosspower</code><a class="reference internal" href="_modules/periodogram.html#Crosspower"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#periodogram.Crosspower" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to calc crosspower of 2 signals</p>
+<dl class="method">
+<dt id="periodogram.Crosspower.calc">
+<code class="descname">calc</code><span class="sig-paren">(</span><em>samples</em>, <em>samples2</em>, <em>rate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/periodogram.html#Crosspower.calc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#periodogram.Crosspower.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>calc:
+parameters: samples samples2  the data arrays
+rate: the sample rate, must be the same for the 2 arrays</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="periodogram.Periodogram">
+<em class="property">class </em><code class="descclassname">periodogram.</code><code class="descname">Periodogram</code><a class="reference internal" href="_modules/periodogram.html#Periodogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#periodogram.Periodogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to calc periodograms of a signal</p>
+<dl class="method">
+<dt id="periodogram.Periodogram.calc">
+<code class="descname">calc</code><span class="sig-paren">(</span><em>samples</em>, <em>rate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/periodogram.html#Periodogram.calc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#periodogram.Periodogram.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>calc:
+parameters: samples the data array
+rate: the sample rate</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-plotting"></span><p>This routine makes the plots, it receives the plot class
+frecVsTime, or envelope or sonogram and it saves the plots</p>
 </div>
 
 
