@@ -4,7 +4,6 @@ import sys
 import bird as bd
 import plotting 
 
-
 '''
 This is a program to process some audio files
 
@@ -32,13 +31,25 @@ if __name__ == '__main__':
     for dict in audio_files.file_list:
         pajarito = bd.Bird(dict, windowDT= 5 )
         if pajarito.is_working:
+            audioName = pajarito.audio.split('.')[0]
+            specie    = pajarito.bird_name
             print pajarito.bird_name, pajarito.audio
-            env = pajarito.get_envelope(50)
+            envelope = pajarito.get_envelope(50)
+#            raw = pajarito.get_frecVsTime()
+#            sonogram = pajarito.get_sonogram()
+            fft = pajarito.get_fft()
+            periodogram = pajarito.get_periodogram()
             
-#            fft = pajarito.get_fft()
-#            periodogram = pajarito.get_periodogram()
-            frecvstime = pajarito.get_frecVsTime()
+            
+#            plotting.plot(sonogram, prefix = './plots/sonogram/',
+#                    name=specie+'_'+audioName, show_plot=False)
+            plotting.plot(envelope, prefix = './plots/envelope/',
+                    name=specie+'_'+audioName, show_plot=False)
+            plotting.plot(periodogram, prefix = './plots/periodogram/',
+                    name=specie+'_'+audioName, show_plot=False)
+            plotting.plot(fft, prefix = './plots/fft_density/',
+                    name=specie+'_'+audioName, show_plot=False)
+#            plotting.plot(raw, prefix = './plots/raw/',
+#                    name=specie+'_'+audioName, show_plot=False)
 
-#            plotting.plot(env)
-#            plotting.plot( frecvstime)
-            #plotting.plot(sonogram)
+
