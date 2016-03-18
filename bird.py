@@ -10,6 +10,16 @@ class Bird(object):
     Aqui se obtienen las propiedades del canto
     """
     def __init__(self, bird_dict, windowDT=1):
+        """
+        Constructor
+
+        Parameters
+        ----------
+        bird_dict : dic
+          Dicionario datos
+        windowDT : float, optional
+          Tiempo en segundo
+        """
         self.dir = bird_dict['path']            # absolute path of dir
         self.audio = bird_dict['filename']        # wav filename
         self.bird_name = bird_dict['especie']   # directory name
