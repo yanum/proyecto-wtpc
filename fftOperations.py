@@ -64,7 +64,7 @@ class fFourierTransform(object):
         #Because the periodogram result is folded (like a mirror), only save n/2 values
         self.modulo_Transf_Fourier_Average_de_Windows = (reduce_fft [:len(reduce_fft) / 2])
         self.freq = self.freq[: len(self.freq)/2]
-        self.fft_dict = {"time":self.freq,"sample":self.modulo_Transf_Fourier_Average_de_Windows,"routine": "fFourierTransform"}
+        self.fft_dict = {"time":self.freq,"sample":self.modulo_Transf_Fourier_Average_de_Windows,"rutine": "fFourierTransform"}
         
         return self.modulo_Transf_Fourier_Average_de_Windows, self.freq
 
