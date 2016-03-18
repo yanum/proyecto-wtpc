@@ -75,13 +75,14 @@ Cuando las cosas funcionan en esta instancia pasan a testing
 * setup.py: módulo para la instalación del paquete (incompleto)
 
 
-### Objetos:
+### Clases:
 
 * Bird:  encapsula los detalles de un canto de un ave
 * Discover_Files: determina los archivos tipo sonido presentes
 * mp3ToWav : convierte los archivos mp3 (si existen) a wav 
-
-
+* Periodogram: estimación de la densidad espectral, para caracterizar el contenido en frecuencia de la señal
+* Crosspower:   cross power spectral density
+* fFourierTransform: promedio de contenido espectral con ventana deslizante
 
 
 
