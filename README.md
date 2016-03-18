@@ -94,3 +94,4 @@ Cuando las cosas funcionan en esta instancia pasan a testing
 * Total de `import`    28
 * Total de funciones definidas   24
 * Total de clases definidas   6
+* Total de módulos definidos   9
